@@ -80,3 +80,9 @@ cleanw:
 .PHONY: cleandepw
 cleandepw:
 	$(DEL) $(DEP)
+
+# Add this to the end of your Makefile
+.PHONY: test
+test: $(TESTNAME)
+	./$(TESTNAME)
+
