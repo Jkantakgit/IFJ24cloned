@@ -17,9 +17,6 @@ jobs:
     - name: Set up GCC
       run: sudo apt-get install -y build-essential
 
-    - name: Configure
-      run: ./configure  # Ensure you have a configure script; otherwise, this line can be removed
-
     - name: Build the application
       run: make
 
