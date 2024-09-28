@@ -117,6 +117,7 @@ void test_symtable_find_node(void){
   CU_ASSERT_EQUAL(node65->arguments, NULL);
 
   int success = freeTree(tree);
+  CU_ASSERT_EQUAL(success,1);
 
 }
 
