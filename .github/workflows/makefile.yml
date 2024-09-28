@@ -19,8 +19,14 @@ jobs:
         sudo apt-get install -y build-essential
         sudo apt-get install -y libcunit1 libcunit1-dev
 
+    - name: Build tests
+      run: make tests
+
     - name: Run tests
-      run: make run_tests  # Ensure you have a 'test' target in your Makefile
+      run: |
+        ./tests | tee test_results.log  # Redirect output to log file and display on console
+        echo "Test Results:"
+        cat test_results.log  # Display the log file
 
     - name: Run distcheck
       run: make distcheck  # Ensure this target is defined in your Makefile
