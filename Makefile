@@ -47,8 +47,9 @@ $(APPNAME): $(OBJ)
 
 # Builds the test executable
 $(TESTNAME): $(OBJ) $(TESTOBJ)
-	directories
 	$(CC) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+
+build_tests: directories $(TESTNAME)
 
 
 # Creates the dependency rules
