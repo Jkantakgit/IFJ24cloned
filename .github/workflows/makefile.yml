@@ -23,10 +23,7 @@ jobs:
       run: make build_tests
 
     - name: Run tests
-      run: |
-        ./tests | tee test_results.log  # Redirect output to log file and display on console
-        echo "Test Results:"
-        cat test_results.log  # Display the log file
+      run: make run_tests
 
     - name: Run distcheck
       run: make distcheck  # Ensure this target is defined in your Makefile
