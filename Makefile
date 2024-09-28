@@ -47,6 +47,7 @@ $(APPNAME): $(OBJ)
 
 # Builds the test executable
 $(TESTNAME): $(OBJ) $(TESTOBJ)
+	directories
 	$(CC) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 
