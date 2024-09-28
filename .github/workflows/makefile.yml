@@ -20,7 +20,7 @@ jobs:
         sudo apt-get install -y libcunit1 libcunit1-dev
 
     - name: Build tests
-      run: make tests
+      run: make build_tests
 
     - name: Run tests
       run: |
