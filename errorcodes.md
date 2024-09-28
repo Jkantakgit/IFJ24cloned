@@ -10,8 +10,7 @@
 - 8 - sémantická chyba odvození typu – typ proměnné není uveden a nelze odvodit od použitého výrazu.
 - 9 - sémantická chyba nevyužité proměnné v jejím rozsahu platnosti; modifikovatelná proměnná bez možnosti změny po její inicializaci.
 - 10 - ostatní sémantické chyby.
-- 99 - interní chyba překladače tj. neovlivněná vstupním programem (např. chyba alo-
-  kace paměti atd.).
+- 99 - interní chyba překladače tj. neovlivněná vstupním programem (např. chyba alokace paměti atd.).
 - 0 - chybně zadané vstupní parametry na příkazovém řádku při spouštění interpretu.
 - 51 - chyba při analýze (lexikální, syntaktická) vstupního kódu v IFJcode24.
 - 52 - chyba při sémantických kontrolách vstupního kódu v IFJcode24.

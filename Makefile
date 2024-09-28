@@ -1,18 +1,14 @@
-########################################################################
-####################### Makefile Template ##############################
-########################################################################
-
 # Compiler settings - Can be customized.
 CC = gcc
 CXXFLAGS = -std=c11 -Wall
-LDFLAGS =
+LDFLAGS = -lcunit
 
 # Makefile settings - Can be customized.
 APPNAME = myapp
-TESTNAME = symtable_test
+TESTNAME = tests
 EXT = .c
 SRCDIR = src
-TESTDIR = tests
+TESTDIR = test
 OBJDIR = obj
 TESTOBJDIR = obj/tests
 
@@ -25,10 +21,9 @@ DEP = $(OBJ:$(OBJDIR)/%.o=%.d)
 TESTSRC = $(wildcard $(TESTDIR)/*$(EXT))
 TESTOBJ = $(TESTSRC:$(TESTDIR)/%$(EXT)=$(TESTOBJDIR)/%.o)
 
-
 # UNIX-based OS variables & settings
-RM = rm
-DELOBJ = $(OBJ)
+RM = rm -rf
+DELOBJ = $(OBJ) $(TESTOBJ)
 # Windows OS variables & settings
 DEL = del
 EXE = .exe
@@ -38,13 +33,24 @@ WDELOBJ = $(SRC:$(SRCDIR)/%$(EXT)=$(OBJDIR)\\%.o) $(TESTSRC:$(TESTDIR)/%$(EXT)=$
 ####################### Targets beginning here #########################
 ########################################################################
 
-all: $(APPNAME)
+# Ensure the obj and obj/tests directories exist
+.PHONY: directories
+directories:
+	mkdir -p $(OBJDIR) $(TESTOBJDIR)
 
-# Builds the app
+# Builds the app without linking tests
+all: directories $(APPNAME)
+
+# Builds the application (without tests)
 $(APPNAME): $(OBJ)
 	$(CC) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
-# Creates the dependecy rules
+# Builds the test executable
+$(TESTNAME): $(OBJ) $(TESTOBJ)
+	$(CC) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+
+
+# Creates the dependency rules
 %.d: $(SRCDIR)/%$(EXT)
 	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
 
@@ -70,6 +76,11 @@ clean:
 cleandep:
 	$(RM) $(DEP)
 
+# Target to run tests after building
+.PHONY: run_tests
+run_tests: $(TESTNAME)
+	./$(TESTNAME)
+
 #################### Cleaning rules for Windows OS #####################
 # Cleans complete project
 .PHONY: cleanw
@@ -80,9 +91,3 @@ cleanw:
 .PHONY: cleandepw
 cleandepw:
 	$(DEL) $(DEP)
-
-# Add this to the end of your Makefile
-.PHONY: test
-test: $(TESTNAME)
-	./$(TESTNAME)
-
