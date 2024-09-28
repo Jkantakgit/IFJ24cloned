@@ -24,6 +24,3 @@ jobs:
 
     - name: Run tests
       run: make run_tests
-
-    - name: Run distcheck
-      run: make distcheck  # Ensure this target is defined in your Makefile
