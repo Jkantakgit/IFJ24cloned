@@ -78,7 +78,7 @@ cleandep:
 
 # Target to run tests after building
 .PHONY: run_tests
-run_tests: $(TESTNAME)
+run_tests: directories $(TESTNAME)
 	./$(TESTNAME)
 
 #################### Cleaning rules for Windows OS #####################
